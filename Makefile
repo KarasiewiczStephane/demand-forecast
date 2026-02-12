@@ -1,4 +1,4 @@
-.PHONY: install test lint clean run docker dashboard
+.PHONY: install test lint clean run dashboard docker-build docker-run ci-local
 
 install:
 	pip install -r requirements.txt
@@ -20,6 +20,13 @@ run:
 dashboard:
 	streamlit run src/dashboard/app.py
 
-docker:
-	docker build -t $(shell basename $(CURDIR)) .
-	docker run -p 8000:8000 $(shell basename $(CURDIR))
+docker-build:
+	docker build -t demand-forecast .
+
+docker-run:
+	docker run -p 8501:8501 -v $(PWD)/data:/app/data demand-forecast
+
+ci-local:
+	ruff check src/ tests/
+	ruff format --check src/ tests/
+	pytest tests/ -v --tb=short --cov=src --cov-fail-under=80
