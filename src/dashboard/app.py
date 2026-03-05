@@ -32,26 +32,26 @@ st.sidebar.title("Navigation")
 page = st.sidebar.selectbox("Page", PAGES)
 
 if page == "Forecast View":
-    from src.dashboard.pages.forecast import render_forecast_view
+    from src.dashboard._pages.forecast import render_forecast_view
 
     render_forecast_view()
 
 elif page == "Model Comparison":
-    from src.dashboard.pages.comparison import render_model_comparison
+    from src.dashboard._pages.comparison import render_model_comparison
 
     render_model_comparison()
 
 elif page == "Anomaly Explorer":
-    from src.dashboard.pages.anomaly import render_anomaly_explorer
+    from src.dashboard._pages.anomaly import render_anomaly_explorer
 
     render_anomaly_explorer()
 
 elif page == "Seasonality Patterns":
-    from src.dashboard.pages.seasonality import render_seasonality_patterns
+    from src.dashboard._pages.seasonality import render_seasonality_patterns
 
     render_seasonality_patterns()
 
 elif page == "Backtesting Results":
-    from src.dashboard.pages.backtesting import render_backtesting_results
+    from src.dashboard._pages.backtesting import render_backtesting_results
 
     render_backtesting_results()
