@@ -6,6 +6,12 @@ Anomaly Explorer, Seasonality Patterns, and Backtesting Results.
 
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+
+# Ensure project root is on sys.path so `src.*` imports work with `streamlit run`
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 import streamlit as st
 
 st.set_page_config(

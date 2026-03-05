@@ -56,7 +56,18 @@ def main() -> None:
 
     logger.info("Running command: %s", args.command)
 
-    if args.command == "dashboard":
+    if args.command == "download":
+        from src.data.downloader import KaggleDownloader
+        from src.utils.config import load_config
+
+        config = load_config()
+        downloader = KaggleDownloader(
+            competition=config.data["kaggle_competition"],
+            download_path=config.data["raw_path"],
+        )
+        downloader.download()
+
+    elif args.command == "dashboard":
         import subprocess
 
         subprocess.run(
