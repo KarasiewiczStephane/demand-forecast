@@ -54,7 +54,7 @@ A production-ready demand forecasting system combining three ML models (Prophet,
 - Python 3.11+
 - Kaggle account (for dataset download)
 
-### Installation
+### 1. Install
 
 ```bash
 # Clone repository
@@ -66,38 +66,44 @@ python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
 # Install dependencies
-pip install -r requirements.txt
-
-# Set up Kaggle credentials
-export KAGGLE_USERNAME="your_username"
-export KAGGLE_KEY="your_key"
+make install
 ```
 
-### Download Data & Train Models
+### 2. Download Data
+
+The project uses the [Kaggle Store Sales](https://www.kaggle.com/competitions/store-sales-time-series-forecasting) dataset. Set your Kaggle API credentials (see [Kaggle API docs](https://github.com/Kaggle/kaggle-api#api-credentials)) and download:
 
 ```bash
-# Download Store Sales dataset
-python -m src.main download
+export KAGGLE_USERNAME="your_username"
+export KAGGLE_KEY="your_key"
 
+python -m src.main download
+```
+
+This downloads and extracts all competition files into `data/raw/`.
+
+### 3. Train Models & Run Analysis
+
+```bash
 # Run anomaly detection
 python -m src.main detect-anomalies
 
-# Train all models
+# Train all models (Prophet, LSTM, XGBoost)
 python -m src.main train --models all
 
-# Run backtesting
+# Run backtesting evaluation
 python -m src.main backtest
 ```
 
-### Launch Dashboard
+You can also train a single model: `python -m src.main train --models prophet`
+
+### 4. Launch Dashboard
 
 ```bash
 make dashboard
-# or
-streamlit run src/dashboard/app.py
 ```
 
-Open http://localhost:8501 in your browser.
+Open http://localhost:8501 in your browser. The dashboard provides five interactive pages (see [Dashboard Pages](#dashboard-pages) below).
 
 ### Docker Deployment
 
@@ -178,12 +184,13 @@ make ci-local
 | Command | Description |
 |---------|-------------|
 | `make install` | Install dependencies |
+| `make run` | Print CLI help (`python -m src.main`) |
 | `make test` | Run tests with coverage |
 | `make lint` | Run ruff linter and formatter |
-| `make dashboard` | Launch Streamlit dashboard |
+| `make dashboard` | Launch Streamlit dashboard on port 8501 |
 | `make docker-build` | Build Docker image |
-| `make docker-run` | Run Docker container |
-| `make ci-local` | Run full CI checks locally |
+| `make docker-run` | Run Docker container on port 8501 |
+| `make ci-local` | Run lint + format check + tests (80% coverage gate) |
 | `make clean` | Remove caches |
 
 ## License
