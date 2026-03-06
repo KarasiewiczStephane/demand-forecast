@@ -51,23 +51,23 @@ class TestDashboardImports:
 
     def test_import_forecast_page(self) -> None:
         """The forecast page module should be importable."""
-        import src.dashboard.pages.forecast  # noqa: F401
+        import src.dashboard._pages.forecast  # noqa: F401
 
     def test_import_comparison_page(self) -> None:
         """The comparison page module should be importable."""
-        import src.dashboard.pages.comparison  # noqa: F401
+        import src.dashboard._pages.comparison  # noqa: F401
 
     def test_import_anomaly_page(self) -> None:
         """The anomaly page module should be importable."""
-        import src.dashboard.pages.anomaly  # noqa: F401
+        import src.dashboard._pages.anomaly  # noqa: F401
 
     def test_import_seasonality_page(self) -> None:
         """The seasonality page module should be importable."""
-        import src.dashboard.pages.seasonality  # noqa: F401
+        import src.dashboard._pages.seasonality  # noqa: F401
 
     def test_import_backtesting_page(self) -> None:
         """The backtesting page module should be importable."""
-        import src.dashboard.pages.backtesting  # noqa: F401
+        import src.dashboard._pages.backtesting  # noqa: F401
 
 
 class TestLoadBacktestReport:

@@ -31,23 +31,39 @@ class TestMain:
 
     def test_download_command(self) -> None:
         """Download command should be recognized."""
-        with patch("sys.argv", ["main", "download"]):
+        with (
+            patch("sys.argv", ["main", "download"]),
+            patch("src.main.KaggleDownloader") as mock_dl,
+        ):
             main()
+            mock_dl.assert_called_once()
 
     def test_detect_anomalies_command(self) -> None:
         """Detect-anomalies command should be recognized."""
-        with patch("sys.argv", ["main", "detect-anomalies"]):
+        with (
+            patch("sys.argv", ["main", "detect-anomalies"]),
+            patch("src.main.run_detect_anomalies") as mock_fn,
+        ):
             main()
+            mock_fn.assert_called_once()
 
     def test_train_command(self) -> None:
         """Train command should be recognized."""
-        with patch("sys.argv", ["main", "train", "--models", "all"]):
+        with (
+            patch("sys.argv", ["main", "train", "--models", "all"]),
+            patch("src.main.run_train") as mock_fn,
+        ):
             main()
+            mock_fn.assert_called_once()
 
     def test_backtest_command(self) -> None:
         """Backtest command should be recognized."""
-        with patch("sys.argv", ["main", "backtest"]):
+        with (
+            patch("sys.argv", ["main", "backtest"]),
+            patch("src.main.run_backtest") as mock_fn,
+        ):
             main()
+            mock_fn.assert_called_once()
 
     def test_dashboard_command(self) -> None:
         """Dashboard command should invoke streamlit."""
