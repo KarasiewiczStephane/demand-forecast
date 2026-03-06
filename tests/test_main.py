@@ -33,7 +33,7 @@ class TestMain:
         """Download command should be recognized."""
         with (
             patch("sys.argv", ["main", "download"]),
-            patch("src.main.KaggleDownloader") as mock_dl,
+            patch("src.data.downloader.KaggleDownloader") as mock_dl,
         ):
             main()
             mock_dl.assert_called_once()
